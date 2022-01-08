@@ -123,13 +123,16 @@ if(tb){
            
             
         })
+        let datacustom=readDataFromStorage()
+        console.log(datacustom)
         const td=createMyOwnElement('td',tr)
         const Delbtn = createMyOwnElement('button',td,"btn btn-danger m-auto me-1","Delete")
         const Edbtn = createMyOwnElement('button',td,"btn btn-warning m-auto me-1","Edit")
         const showbtn = createMyOwnElement('button',td,"btn btn-primary m-auto me-1","Show")
         const addwith = createMyOwnElement('button',td,"btn btn-success m-auto","Add/Withdraw")
         addwith.addEventListener('click',function(e){
-            data=datacustom.find(u=> u.accnum ==user.accnum)
+            data=datacustom.find(u=> u.accnum ==cu.accnum)
+            console.log(user.accnum)
             console.log(data)
             // setDatatoLocalStorage2(JSON.stringify(data))
             // window.location.replace('addwith.html')
