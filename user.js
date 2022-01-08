@@ -103,13 +103,13 @@ window.location.replace('index.html')
 }
 const tb=document.querySelector('#tablebody')
 const addNew=document.querySelector('#addnew')
-
-if(tb){
+drawItem=function(){
     addNew.addEventListener('click',function(){
         window.location.replace('add.html')
     })
 
    let datacustom=readDataFromStorage()
+   tb.innerHTML=''
    if(datacustom.length==0){
        const tr=createMyOwnElement('tr',tb,"alert alert-danger text-center")
        createMyOwnElement('td',tr,'','No Users Yet',[{attrName:'colspan',attrValue:6}])
@@ -127,6 +127,12 @@ if(tb){
         console.log(datacustom)
         const td=createMyOwnElement('td',tr)
         const Delbtn = createMyOwnElement('button',td,"btn btn-danger m-auto me-1","Delete")
+        Delbtn.addEventListener('click',function(){
+
+            delData=datacustom.filter(s=> s.accnum!==cu.accnum)
+            setDatatoLocalStorage(delData)
+            drawItem()
+        })
         const Edbtn = createMyOwnElement('button',td,"btn btn-warning m-auto me-1","Edit")
         const showbtn = createMyOwnElement('button',td,"btn btn-primary m-auto me-1","Show")
         const addwith = createMyOwnElement('button',td,"btn btn-success m-auto","Add/Withdraw")
@@ -134,20 +140,19 @@ if(tb){
             data=datacustom.find(u=> u.accnum ==cu.accnum)
             console.log(user.accnum)
             console.log(data)
-            // setDatatoLocalStorage2(JSON.stringify(data))
+            setDatatoLocalStorage2(data)
             // window.location.replace('addwith.html')
         })
    
     
     })
    }
-
-
-
+    
 }
+if(tb)drawItem()
 transheads=[
     {name:"deposite",dataStore:'checked'},
-    {name:'withdraw',dataStore:'checked'},
+    {name:'withdraw',dataStore:'chec ked'},
     {name:'Value',dataStore:'value'}
 ]
 const trans={}
